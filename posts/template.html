@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Post template · ROPlabs</title>
+<meta name="description" content="Reusable post template for ROPlabs: code blocks, figures, tables, callouts and embeds.">
+<meta name="theme-color" content="#070509">
+<link rel="icon" href="../assets/favicon.png" type="image/png">
+<link rel="apple-touch-icon" href="../assets/favicon.png">
+<link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body>
+
+<a class="skip" href="#main">Skip to content</a>
+<div class="scene" aria-hidden="true"></div>
+<div class="petals" aria-hidden="true"></div>
+
+<header class="top">
+  <div class="wrap top__inner">
+    <a class="mark" href="../index.html">
+      <img src="../assets/l.png" alt="" width="30" height="30" decoding="async">
+      ROP<b>Labs</b>
+    </a>
+    <nav aria-label="Main">
+      <ul>
+        <li><a href="../index.html">Home</a></li>
+        <li><a href="who-we-are.html">Who we are</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main id="main" class="wrap">
+
+  <!--
+    ==========================================================================
+    POST TEMPLATE
+    Copy this file to posts/your-slug.html and replace:
+      1. <title>, the meta description and the <h1>
+      2. the <time> element
+      3. the body inside .prose, where every supported element is shown
+    Then add one line to the writing list in index.html.
+    ==========================================================================
+  -->
+
+  <article class="article">
+    <header>
+      <h1>Post title goes here</h1>
+      <time datetime="2026-09-17">17 September 2026</time>
+    </header>
+
+    <div class="prose">
+
+      <p>
+        Opening paragraph. Keep it to what the post proves, then move straight into the first piece of
+        evidence. Inline code looks like <code>this</code> and <strong>bold</strong> is for the one claim that
+        matters.
+      </p>
+
+      <p>
+        A second short paragraph, if it earns its place. Otherwise delete it: the list below is the shape of
+        the page: heading, prose, code, figure, table, callout.
+      </p>
+
+      <h2>First section</h2>
+
+      <p>A short introduction to the code that follows.</p>
+
+      <figure class="code" data-lang="python">
+        <figcaption class="code__bar">
+          <span class="code__lang">python</span>
+          <button class="code__copy" type="button">Copy</button>
+        </figcaption>
+        <pre><code>from pwn import *
+
+elf = ELF("./vuln", checksec=False)
+libc = ELF("./libc.so.6", checksec=False)
+
+io = process(elf.path)
+io.sendline(cyclic(200, n=8))
+io.wait()
+
+core = io.corefile
+offset = cyclic_find(core.read(core.rsp, 8), n=8)
+log.info(f"return offset = {offset} bytes")</code></pre>
+      </figure>
+
+      <p>
+        Explain what the block does and what it does <em>not</em> prove. Every code block is a
+        <code>figure.code</code> with <code>data-lang</code>; the label chip and the copy button are part of
+        the markup.
+      </p>
+
+      <h3>Sub-section</h3>
+
+      <p>Other languages work too: the highlighter reads <code>data-lang</code> and picks the right scanner.</p>
+
+      <figure class="code" data-lang="bash">
+        <figcaption class="code__bar">
+          <span class="code__lang">bash</span>
+          <button class="code__copy" type="button">Copy</button>
+        </figcaption>
+        <pre><code># Pin the interpreter so offsets stop moving between runs
+patchelf --set-interpreter ./libc.so.6 ./vuln
+for i in $(seq 1 5); do ./vuln &lt;&lt;&lt; "$(python3 -c 'print("A"*40)')"; done</code></pre>
+      </figure>
+
+      <figure class="code" data-lang="c">
+        <figcaption class="code__bar">
+          <span class="code__lang">c</span>
+          <button class="code__copy" type="button">Copy</button>
+        </figcaption>
+        <pre><code>/* The layout found in the core dump */
+struct frame {
+    uint64_t saved_rbp;
+    uint64_t return_addr;
+    char     overflow[64];
+};</code></pre>
+      </figure>
+
+      <h2>Images</h2>
+
+      <p>A single figure, with a caption and click-to-zoom (<code>data-lightbox</code>):</p>
+
+      <figure>
+        <img src="../assets/paisagem.webp" alt="Placeholder image" width="1672" height="941" data-lightbox decoding="async">
+        <figcaption>Caption for the image above.</figcaption>
+      </figure>
+
+      <p>Or several side by side, which stack on small screens:</p>
+
+      <div class="gallery">
+        <figure>
+          <img src="../assets/l.png" alt="Placeholder image" data-lightbox decoding="async" loading="lazy">
+          <figcaption>First</figcaption>
+        </figure>
+        <figure>
+          <img src="../assets/b.png" alt="Placeholder image" data-lightbox decoding="async" loading="lazy">
+          <figcaption>Second</figcaption>
+        </figure>
+      </div>
+
+      <h2>Video and slides</h2>
+
+      <p>Wrap any iframe or video in <code>.embed</code> for a responsive 16:9 box.</p>
+
+      <div class="embed">
+        <video controls playsinline preload="none">
+          <source src="../assets/demo.mp4" type="video/mp4">
+          Your browser cannot play this video.
+        </video>
+      </div>
+
+      <h2>Tables</h2>
+
+      <p>Tables scroll sideways on phones instead of squashing.</p>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Stage</th><th>Primitive</th><th>Reliability</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Leak</td><td><code>puts@got</code></td><td>5 / 5</td></tr>
+            <tr><td>Alignment</td><td>plain <code>ret</code></td><td>5 / 5</td></tr>
+            <tr><td>Shell</td><td><code>system("/bin/sh")</code></td><td>4 / 5</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2>Callouts</h2>
+
+      <div class="callout">
+        <b>Note</b>
+        <p>The default callout, for a fact worth pausing on.</p>
+      </div>
+
+      <p>Quotes use the same hairline as the callout:</p>
+
+      <blockquote>
+        <p>A sentence worth setting apart from the rest of the page.</p>
+      </blockquote>
+
+      <h2>Lists</h2>
+
+      <ul>
+        <li>Unordered item.</li>
+        <li>Another item.</li>
+      </ul>
+
+      <ol>
+        <li>Ordered item.</li>
+        <li>Another item.</li>
+      </ol>
+
+      <p>That is the whole vocabulary. Everything else is a heading.</p>
+
+    </div>
+  </article>
+
+</main>
+
+<footer class="bottom">
+  <div class="wrap">
+    <p>© 2026 ROPlabs</p>
+  </div>
+</footer>
+
+<script src="../assets/js/main.js" defer></script>
+</body>
+</html>

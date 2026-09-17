@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Who we are · ROPlabs</title>
+<meta name="description" content="ROPlabs is a security engineering firm. Threat modeling, security audits, penetration testing and vulnerability research, all backed by proof.">
+<meta name="theme-color" content="#070509">
+<link rel="icon" href="../assets/favicon.png" type="image/png">
+<link rel="apple-touch-icon" href="../assets/favicon.png">
+<link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body>
+
+<a class="skip" href="#main">Skip to content</a>
+<div class="scene" aria-hidden="true"></div>
+<div class="petals" aria-hidden="true"></div>
+
+<header class="top">
+  <div class="wrap top__inner">
+    <a class="mark" href="../index.html">
+      <img src="../assets/l.png" alt="" width="30" height="30" decoding="async">
+      ROP<b>Labs</b>
+    </a>
+    <nav aria-label="Main">
+      <ul>
+        <li><a href="../index.html">Home</a></li>
+        <li><a href="who-we-are.html" aria-current="page">Who we are</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main id="main" class="wrap">
+
+  <article class="article">
+    <header>
+      <h1>Who we are</h1>
+      <time datetime="2026-09-17">17 September 2026</time>
+    </header>
+
+    <div class="prose">
+
+      <figure>
+        <picture>
+          <source srcset="../images/blog-1.webp" type="image/webp">
+          <img src="../images/blog-1.png" alt="Cherry blossom trees framing a river that runs toward a distant mountain" width="1400" height="788" data-lightbox decoding="async">
+        </picture>
+        <figcaption>A bloom measured in days. Most of this work is about windows like that.</figcaption>
+      </figure>
+
+      <p>
+        ROPlabs is a security engineering firm. We audit systems, model how they can be attacked, break them
+        under controlled conditions, and research the flaws nobody has found yet. The services are specific:
+        threat modeling, security audits, penetration testing, vulnerability research, exploit development,
+        remediation verification. The purpose behind all of them is one sentence long. Tell you what is
+        actually true about your system, before someone else does it for you.
+      </p>
+
+      <p>
+        Most security work fails for a boring reason: it answers the wrong question. A scanner reports what a
+        tool recognizes. A checklist confirms what the reviewer already assumed. Neither of them tells you
+        whether a determined attacker with a specific goal can reach a specific asset, and neither survives
+        contact with a real build, a real configuration and a real deployment. So we start from the other end.
+        We define what winning looks like for an attacker, we work backwards to the assumptions that would have
+        to break, and we do not stop at an opinion when a proof is possible.
+      </p>
+
+      <h2>What we do</h2>
+
+      <h3>Threat modeling</h3>
+
+      <p>
+        Threat modeling is where security is cheapest, and it is the service we care most about. We sit with the
+        people who built the system and map the trust boundaries, the assets worth taking, and every path
+        between the two. We ask what must fail for an attacker to win, rank those failures by what they would
+        cost to reach, and write it down in a form your engineers can act on. Done properly this happens while
+        the design is still a conversation, when changing a boundary is a decision rather than a rewrite.
+      </p>
+
+      <h3>Security audits and design review</h3>
+
+      <p>
+        We read the design, then we read the code, and we look for the guarantee that everyone assumed somebody
+        else was enforcing. Missing authorization checks, mediation gaps, state machines that accept
+        transitions they should reject, crypto wired correctly and used incorrectly. An audit is not a
+        vulnerability count. It is an answer to the question of whether the system does what its authors
+        believe it does.
+      </p>
+
+      <h3>Penetration testing</h3>
+
+      <p>
+        Testing runs against real builds and real configuration, never against a diagram. Every engagement
+        starts by defining what a compromise means in your environment, because otherwise a test has no
+        failure condition and any result can be called a pass. From there we work the way a motivated adversary
+        works: chaining findings when a single one is not enough, using the application the way its users do,
+        and treating the difference between "a bug exists" and "an attacker gets somewhere" as the entire point
+        of the exercise.
+      </p>
+
+      <h3>Vulnerability research and exploit development</h3>
+
+      <p>
+        When the answer is not in source you own, we go to the target itself: binaries, firmware, protocols,
+        parsers, update mechanisms. We find the flaw, prove it with an exploit that runs end to end, identify
+        the root cause rather than the crash site, and hand over a reproduction that behaves the same on your
+        machine as it did on ours. Research that nobody can reproduce is a story, not a result.
+      </p>
+
+      <h3>Remediation and retest</h3>
+
+      <p>
+        A finding is not closed because a patch was merged. We re-run the original reproducer, watch it fail,
+        and check what the fix changed around it, since a fix that closes one path has a habit of opening a
+        neighbour. Where a whole class of bug keeps returning, we build the harness or the invariant check that
+        catches it next time without us in the room.
+      </p>
+
+      <h2>How we work</h2>
+
+      <ul>
+        <li><strong>Evidence over opinion.</strong> Every finding carries a reproducer, the exact build and the exact command, so your team can confirm it on your own hardware.</li>
+        <li><strong>We work backwards from impact.</strong> The interesting question is never whether a bug is real. It is what an attacker gains by using it.</li>
+        <li><strong>We report the limits of our own result.</strong> If something only works against one build, or depends on a configuration we chose, the report says so in the same paragraph as the finding.</li>
+        <li><strong>We write for the person who has to fix it.</strong> Prioritized, reproducible, and free of language designed to impress rather than inform.</li>
+      </ul>
+
+      <p>The environment behind every claim we make is four lines long, and it is public on purpose.</p>
+
+      <figure class="code" data-lang="bash">
+        <figcaption class="code__bar">
+          <span class="code__lang">bash</span>
+          <button class="code__copy" type="button">Copy</button>
+        </figcaption>
+        <pre><code># The whole research environment, in four lines
+git clone https://github.com/roplabs/lab && cd lab
+docker build -t roplabs/lab .
+docker run --rm -it --cap-add=SYS_PTRACE roplabs/lab
+checksec ./vuln   # arch, canary, NX and PIE, in that order</code></pre>
+      </figure>
+
+      <h2>What we do not do</h2>
+
+      <ul>
+        <li>We do not pad a report with findings that do not matter, and we do not raise severity to make an engagement look productive.</li>
+        <li>We do not call the output of an automated tool a penetration test.</li>
+        <li>We do not deliver an exploit we cannot reproduce from a clean environment.</li>
+        <li>We do not tell you something is fixed until we have watched it stay fixed.</li>
+      </ul>
+
+      <h2>Why sakura</h2>
+
+      <p>
+        The blossom is here because of the window. A cherry tree spends a year preparing for a bloom that lasts
+        about a week, and then it lets go. A vulnerability lives quietly inside a product for years and then
+        disappears in a single commit. Both are stories about a short interval that decides everything, and the
+        entire job is to make the second interval shorter than the first. That is the whole reason this lab
+        exists, and it seemed wrong to decorate the work with anything else.
+      </p>
+
+      <p>
+        There is also the craft. Exploitation is an exact discipline: an offset wrong by four bytes produces
+        nothing at all, a heap layout that is one allocation out of order turns an elegant chain into a crash,
+        and a stack that is sixteen bytes misaligned fails inside a function nobody was thinking about. When it
+        finally holds, it holds because someone understood the system completely. Elegant code and elegant
+        exploitation come from the same place, and neither of them can be faked.
+      </p>
+
+      <p>
+        Then there are the petals. They fall one at a time, drifting, unimportant on their own. Put them in the
+        right order and they become something that was never supposed to exist. That is the idea the name comes
+        from.
+      </p>
+
+      <blockquote>
+        <p>Small pieces, arranged carefully, until they do something they were never meant to do.</p>
+      </blockquote>
+
+      <p>
+        And the honest reason, which is the one that keeps people in this work for decades: it is beautiful, and
+        we enjoy it. A chain that lands, a race that resolves, a parser that finally gives up its structure.
+        Pink on dark, no padlocks, no shields, no stock photography of a hooded figure. The theme is a reminder
+        that finding flaws in complex systems is a craft, and that crafts are allowed to be enjoyed.
+      </p>
+
+      <h2>What this blog is</h2>
+
+      <p>
+        This is where the work leaves the building. Notes from audits, threat models and research, written up
+        when they are useful to anyone defending the same class of system, and redacted where a client's
+        interest requires it. The posts are technical, the claims are reproducible, and the failures are
+        included, because a write-up that only shows the successful attempt is a marketing document.
+      </p>
+
+      <div class="callout">
+        <b>Contact</b>
+        <p>Engagements, threat model reviews or a target worth a look: <a href="mailto:hello@roplabs.io">hello@roplabs.io</a>.</p>
+      </div>
+
+    </div>
+  </article>
+
+</main>
+
+<footer class="bottom">
+  <div class="wrap">
+    <p>© 2026 ROPlabs</p>
+  </div>
+</footer>
+
+<script src="../assets/js/main.js" defer></script>
+</body>
+</html>
